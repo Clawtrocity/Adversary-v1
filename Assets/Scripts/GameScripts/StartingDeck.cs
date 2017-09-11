@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class StartingDeck : MonoBehaviour {
 
-    public static StartingDeck startingDeck;
-
     public int playerDeck;
     public int enemyDeck;
     public Image playerToken1;
@@ -35,12 +33,15 @@ public class StartingDeck : MonoBehaviour {
     public Image Town12;
     public Image Town13;
 
+    public Actions a1;
+
 
     // Use this for initialization
-    public void Start ()
+    public void Awake()
     {
         playerDeck = GameControl.control.currentDeck;
         enemyDeck = GameControl.control.enemyDeck;
+
 
         if (playerDeck == 1)
         {
@@ -60,6 +61,16 @@ public class StartingDeck : MonoBehaviour {
             playerToken4.sprite = Resources.Load("card10", typeof(Sprite)) as Sprite;
             playerToken5.sprite = Resources.Load("card11", typeof(Sprite)) as Sprite;
             playerToken6.sprite = Resources.Load("card12", typeof(Sprite)) as Sprite;
+        }
+
+        if (playerDeck == 3)
+        {
+            Card.NewCard(1, 1, "Something1", "card1", playerToken1.sprite);
+            Card.NewCard(2, 1, "Something2", "card2", playerToken1.sprite);
+            Card.NewCard(3, 1, "Something3", "card3", playerToken1.sprite);
+            Card.NewCard(1, 1, "Something4", "card4", playerToken1.sprite);
+            Card.NewCard(2, 1, "Something5", "card5", playerToken1.sprite);
+            Card.NewCard(3, 1, "Something6", "card6", playerToken1.sprite);
         }
 
         if (enemyDeck == 1)

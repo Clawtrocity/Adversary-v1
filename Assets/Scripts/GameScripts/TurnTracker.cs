@@ -12,14 +12,14 @@ public class TurnTracker : MonoBehaviour {
     float timer = 60.0F;
     public Text Timer;
 
+    public int playerPower;
+    public int enemyPower;
+    public int townPower;
+
 	// Use this for initialization
 	void Start ()
     {
         turnNumber = 1;
-        LabelControlGame.label.playerGoldTracker = 1;
-        LabelControlGame.label.enemyGoldTracker = 1;
-        LabelControlGame.label.playerPointsTracker = 0;
-        LabelControlGame.label.enemyPointsTracker = 0;
     }
 	
     public void NextTurn()
@@ -28,14 +28,95 @@ public class TurnTracker : MonoBehaviour {
         enemyLocked = 0;
         timer = 60.0F;
         turnNumber += 1;
-        LabelControlGame.label.playerGoldTracker = LabelControlGame.label.playerGoldTracker + 1;
-        LabelControlGame.label.enemyGoldTracker = LabelControlGame.label.enemyGoldTracker + 1;
+        GameControl.control.playerGoldTracker = GameControl.control.playerGoldTracker + turnNumber;
+        GameControl.control.enemyGoldTracker = GameControl.control.enemyGoldTracker + turnNumber;
     }
 
     public void EndTurn()
     {
         playerLocked = 1;
         enemyLocked = 1;
+    }
+
+    public void EndOfTurn()
+    {
+        Battle();
+        NextTurn();
+    }
+
+    public void Battle()
+    {
+        if (Actions.ts1.Count / GameControl.control.TownSlot1 != 1)
+        {
+            foreach (Transform card in Actions.ts1)
+            {
+                if (Card.aff == 1)
+                {
+                    playerPower += 1;
+                }
+
+                if (Card.aff == 0)
+                {
+                    townPower += 1;
+                }
+
+                if (Card.aff == -1)
+                {
+                    enemyPower += 1;
+                }
+            }
+
+            if (playerPower > enemyPower)
+            {
+                enemyPower = -1;
+                foreach(Transform card in Actions.ts1)
+                {
+                    if (Card.aff == -1)
+                    {
+                        Destroy(card);
+                    }
+                }
+            }
+            else
+            {
+                playerPower = -1;
+                foreach (Transform card in Actions.ts1)
+                {
+                    if (Card.aff == 1)
+                    {
+                        Destroy(card);
+                    }
+                }
+            }
+
+            if (playerPower > townPower)
+            {
+                foreach (Transform card in Actions.ts1)
+                {
+                    if (Card.aff == 0)
+                    {
+                        Destroy(card);
+                        LabelControlGame.label.playerPointsTracker += Card.points;
+                    }
+                }
+            }
+
+            if (enemyPower > townPower)
+            {
+                foreach (Transform card in Actions.ts1)
+                {
+                    if (Card.aff == 0)
+                    {
+                        Destroy(card);
+                        LabelControlGame.label.enemyPointsTracker += Card.points;
+                    }
+                }
+            }
+        }
+
+        playerPower = 0;
+        enemyPower = 0;
+        townPower = 0;
     }
 
 	// Update is called once per frame
@@ -47,12 +128,12 @@ public class TurnTracker : MonoBehaviour {
         {
             playerLocked = 1;
             enemyLocked = 1;
-            NextTurn();
+            EndOfTurn();
         }
 
         if (playerLocked == 1 && enemyLocked == 1)
         {
-            NextTurn();
+            EndOfTurn();
         }
 
         turnCounter.text = "Turn: " + turnNumber.ToString();

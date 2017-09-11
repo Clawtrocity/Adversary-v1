@@ -2,6 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour {
 
@@ -24,6 +25,27 @@ public class GameControl : MonoBehaviour {
     public int enemyDeck;
     public string playerVillain;
     public string enemyVillain;
+    public string playerGold;
+    public string playerPoints;
+    public int playerPointsTracker;
+    public int playerGoldTracker;
+    public string enemyGold;
+    public string enemyPoints;
+    public int enemyPointsTracker;
+    public int enemyGoldTracker;
+    public int TownSlot1;
+    public int TownSlot2;
+    public int TownSlot3;
+    public int TownSlot4;
+    public int TownSlot5;
+    public int TownSlot6;
+    public int TownSlot7;
+    public int TownSlot8;
+    public int TownSlot9;
+    public int TownSlot10;
+    public int TownSlot11;
+    public int TownSlot12;
+    public int TownSlot13;
 
     void OnEnable()
     {
@@ -37,6 +59,7 @@ public class GameControl : MonoBehaviour {
 
     void Awake()
     {
+
         if (control == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -101,6 +124,20 @@ public class GameControl : MonoBehaviour {
             profileName = data.profileName;
             profileElo = data.profileElo;
             playerVillain = data.playerVillain;
+        }
+    }
+
+    public void Update()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if (sceneName == "Game")
+        {
+            playerPoints = "Points: " + playerPointsTracker;
+            playerGold = "Gold: " + playerGoldTracker;
+            enemyPoints = "Points: " + enemyPointsTracker;
+            enemyGold = "Gold: " + enemyGoldTracker;
         }
     }
 }

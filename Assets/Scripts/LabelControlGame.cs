@@ -22,13 +22,30 @@ public class LabelControlGame : MonoBehaviour
     {
         profileName.text = GameControl.control.profileName.ToString();
         enemyName.text = GameControl.control.enemyName.ToString();
+        playerGoldTracker = 1;
+        enemyGoldTracker = 1;
+        playerPointsTracker = 1;
+        enemyPointsTracker = 1;
     }
 
     void Update()
     {
-        playerPoints.text = "Points: " + playerPointsTracker;
-        playerGold.text = "Gold: " + playerGoldTracker;
-        enemyPoints.text = "Points: " + enemyPointsTracker;
-        enemyGold.text = "Gold: " + enemyGoldTracker;
+        playerPoints.text = GameControl.control.playerPoints;
+        playerGold.text = GameControl.control.playerGold;
+        enemyPoints.text = GameControl.control.enemyPoints;
+        enemyGold.text = GameControl.control.enemyGold;
+    }
+
+    public int PlayerGoldTracker
+    {
+        get
+        {
+            return playerGoldTracker;
+        }
+
+        set
+        {
+            playerGoldTracker = value;
+        }
     }
 }

@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TownSlot1
+  - TownSlot2
+  - TownSlot3
+  - TownSlot4
+  - TownSlot5
+  - TownSlot6
+  - TownSlot7
+  - TownSlot8
+  - TownSlot9
+  - TownSlot10
+  - TownSlot11
+  - TownSlot12
+  - TownSlot13
   layers:
   - Default
   - TransparentFX

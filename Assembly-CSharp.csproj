@@ -54,12 +54,13 @@
      <Compile Include="Assets\Scripts\CreateGame.cs" />
      <Compile Include="Assets\Scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\GameScripts\Actions.cs" />
-     <Compile Include="Assets\Scripts\GameScripts\DragHandler.cs" />
+     <Compile Include="Assets\Scripts\GameScripts\Card.cs" />
      <Compile Include="Assets\Scripts\GameScripts\StartingDeck.cs" />
      <Compile Include="Assets\Scripts\GameScripts\TurnTracker.cs" />
      <Compile Include="Assets\Scripts\LabelControlGame.cs" />
      <Compile Include="Assets\Scripts\LabelControlSetup.cs" />
      <Compile Include="Assets\Scripts\SetupAnimation.cs" />
+     <Compile Include="Assets\Scripts\slot.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
